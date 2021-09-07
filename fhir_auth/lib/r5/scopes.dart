@@ -31,6 +31,8 @@ abstract class Scopes implements _$Scopes {
     /// almost always coupled with fhirUser
     bool openid,
 
+    bool system,
+    
     /// permission to retrieve information about the current logged-in user
     /// almost always coupled with openid
     bool fhirUser,
@@ -70,6 +72,10 @@ abstract class Scopes implements _$Scopes {
   /// checks if each item is null or false, and includes it appropriately
   List<String> scopesList() {
     List<String> returnValue = [];
+    
+    if (system ?? false) {
+      returnValue.add('system/*.*');
+    }
     if (openid ?? false) {
       returnValue.add('openId');
     }
